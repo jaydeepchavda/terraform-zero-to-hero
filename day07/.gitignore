@@ -1,0 +1,89 @@
+# ==========================
+# Terraform Working Directory
+# ==========================
+.terraform/
+**/.terraform/*
+
+# ==========================
+# Terraform State Files
+# ==========================
+*.tfstate
+*.tfstate.*
+terraform.tfstate
+terraform.tfstate.backup
+
+# ==========================
+# Terraform Plan Files
+# ==========================
+*.tfplan
+*.plan
+plan.out
+
+# ==========================
+# Variable Files
+# ==========================
+terraform.tfvars
+terraform.tfvars.json
+*.auto.tfvars
+*.auto.tfvars.json
+*.tfvars
+*.tfvars.json
+
+# ==========================
+# Override Files
+# ==========================
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# ==========================
+# Terraform CLI Config
+# ==========================
+.terraformrc
+terraform.rc
+
+# ==========================
+# Dependency Lock File
+# Uncomment ONLY if you don't want to version provider locks.
+# Recommended: Commit this file.
+# ==========================
+# .terraform.lock.hcl
+
+# ==========================
+# Crash Logs
+# ==========================
+crash.log
+crash.*.log
+
+# ==========================
+# Sensitive Files
+# ==========================
+*.pem
+*.key
+*.p12
+*.jks
+
+# ==========================
+# Environment Files
+# ==========================
+.env
+.env.*
+*.env
+
+# ==========================
+# Logs
+# ==========================
+*.log
+
+# ==========================
+# IDE
+# ==========================
+.vscode/
+.idea/
+
+# ==========================
+# OS Files
+# ==========================
+.DS_Store
+Thumbs.db

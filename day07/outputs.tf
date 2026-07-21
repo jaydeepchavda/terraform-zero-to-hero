@@ -9,3 +9,8 @@ output "ec2_id" {
 output "bucket_name" {
   value = aws_s3_bucket.demo_bucket.bucket
 }
+
+
+output "azs" {
+  value = var.availability_zones
+}

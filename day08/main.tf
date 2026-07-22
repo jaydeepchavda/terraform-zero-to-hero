@@ -49,9 +49,7 @@ resource "aws_ebs_volume" "extra_disk" {
 
 }
 
-##############################################
 # Volume Attachment
-##############################################
 
 resource "aws_volume_attachment" "attach" {
 

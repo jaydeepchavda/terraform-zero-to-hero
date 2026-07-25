@@ -5,18 +5,32 @@ resource "aws_instance" "example" {
   tags          = var.tags
 }
 
-
+# dynamic blocks example
 resource "aws_security_group" "ingress_rule" {
   name   = "sg"
 
-  ingress  { 
-    from_port = 80
-    to_port   = 80
-    protocol = "http"
-
-    cidr_blocks = ["0.0.0.0/0"]
+  dynamic "ingress"  { 
+    for_each = var.ingress_rules
+    content {
+      from_port = ingress.value.from_port
+      to_port   = ingress.value.to_port
+      protocol = ingress.value.protocol
+      cidr_blocks = ingress.value.cidr_blocks
+    }
+    
 }
   egress  = []
 }
+
+# flat expressions
+
+locals {
+  all_instances_ids = aws_instance.example[*].id
+}
+
+output "instances" {
+  value = local.all_instances_ids
+}
+
 
 # {""_-

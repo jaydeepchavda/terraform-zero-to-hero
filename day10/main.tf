@@ -7,19 +7,19 @@ resource "aws_instance" "example" {
 
 # dynamic blocks example
 resource "aws_security_group" "ingress_rule" {
-  name   = "sg"
+  name = "sg"
 
-  dynamic "ingress"  { 
+  dynamic "ingress" {
     for_each = var.ingress_rules
     content {
-      from_port = ingress.value.from_port
-      to_port   = ingress.value.to_port
-      protocol = ingress.value.protocol
+      from_port   = ingress.value.from_port
+      to_port     = ingress.value.to_port
+      protocol    = ingress.value.protocol
       cidr_blocks = ingress.value.cidr_blocks
     }
-    
-}
-  egress  = []
+
+  }
+  egress = []
 }
 
 # flat expressions

@@ -13,7 +13,6 @@ variable "username" {
 
 variable "bucket_name" {
   default = "jaydipaws-web-tech-101"
-
 }
 
 

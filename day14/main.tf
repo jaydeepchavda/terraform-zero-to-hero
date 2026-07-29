@@ -31,7 +31,7 @@ resource "aws_cloudfront_origin_access_control" "oac" {
 
 
 resource "aws_s3_bucket" "first_bucket" {
-  bucket = "my-tf-test-bucket"
+  bucket = "jaydipaws-tf-test-bucket-101"
 }
 
 resource "aws_s3_bucket_policy" "allow_cf" {
@@ -47,8 +47,7 @@ resource "aws_s3_bucket_policy" "allow_cf" {
         "Service": "cloudfront.amazonaws.com"
         },
         "Action": [
-          "s3:GetObject",
-          "s3:ListBucket"
+          "s3:GetObject"
         ],
         "Resource": "${aws_s3_bucket.first_bucket.arn}/*",
           "Condition" = {
@@ -67,12 +66,26 @@ resource "aws_s3_object" "object" {
   bucket = aws_s3_bucket.first_bucket.id
 
   key    = each.value
-  source = "${path.module/www}/${each.value}"
-  etag = filemd5("${path.module/www}/${each.value}")
+  source = "${path.module}/www/${each.value}"
+  etag = filemd5("${path.module}/www/${each.value}")
 
-  content_type = lookup({
-
-  })
+  content_type = lookup(
+  {
+    "html" = "text/html"
+    "css"  = "text/css"
+    "js"   = "application/javascript"
+    "json" = "application/json"
+    "png"  = "image/png"
+    "jpg"  = "image/jpeg"
+    "jpeg" = "image/jpeg"
+    "gif"  = "image/gif"
+    "svg"  = "image/svg+xml"
+    "ico"  = "image/x-icon"
+    "txt"  = "text/plain"
+  },
+  split(".", each.value)[length(split(".", each.value)) - 1],
+  "application/octet-stream"
+)
 }
 
 

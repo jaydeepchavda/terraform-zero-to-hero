@@ -1,27 +1,22 @@
-locals {
-
+local = {
   bucket_purpose = {
-
     app = {
-      purpose = "Application Files"
-    }
-
+      purpose = "Application files"
+    },
     backup = {
-      purpose = "Backup Storage"
-    }
-
+      purpose = "backup storage"
+    },
     logs = {
-      purpose = "Log Storage"
+      purpose = "logs storage"
     }
-
   }
 
   common_tags = {
-
-    Company    = var.company
-    Environment = var.environment
-    Project     = var.project
-
+    Compony = var.company
+    Environement  = var.environment
+    Project = var.project
   }
 
 }
+
+# -_{""

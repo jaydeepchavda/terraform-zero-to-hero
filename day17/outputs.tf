@@ -1,16 +1,22 @@
-output "security_groups" {
+output "servers" {
 
   value = {
 
-    for name, sg in aws_security_group.application_sg :
+    for name, server in aws_instance.server :
 
     name => {
 
-      id = sg.id
+      instance_id = server.id
 
-      name = sg.name
+      public_ip = server.public_ip
 
-      arn = sg.arn
+      private_ip = server.private_ip
+
+      availability_zone = server.availability_zone
+
+      instance_type = server.instance_type
+
+      security_group = aws_security_group.server_sg[name].name
 
     }
 

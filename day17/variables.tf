@@ -16,4 +16,4 @@ variable "project" {
 
 variable "vpc_id" {
   type = string
-}s
+}

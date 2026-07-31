@@ -1,6 +1,6 @@
-resource "aws_security_group" "application_sg" {
+resource "aws_security_group" "server_sg" {
 
-  for_each = local.security_groups
+  for_each = local.servers
 
   name = lower(
     format(
@@ -23,8 +23,7 @@ resource "aws_security_group" "application_sg" {
     content {
 
       from_port = ingress.value
-
-      to_port = ingress.value
+      to_port   = ingress.value
 
       protocol = "tcp"
 
@@ -37,8 +36,7 @@ resource "aws_security_group" "application_sg" {
   egress {
 
     from_port = 0
-
-    to_port = 0
+    to_port   = 0
 
     protocol = "-1"
 
@@ -62,7 +60,52 @@ resource "aws_security_group" "application_sg" {
         )
       )
 
-      Application = title(each.key)
+    }
+
+  )
+
+  resource "aws_instance" "server" {
+
+  for_each = local.servers
+
+  ami = data.aws_ami.ubuntu.id
+
+  instance_type = each.value.instance_type
+
+  monitoring = each.value.monitoring
+
+  vpc_security_group_ids = [
+
+    aws_security_group.server_sg[each.key].id
+
+  ]
+
+  root_block_device {
+
+    volume_size = each.value.volume_size
+
+    volume_type = "gp3"
+
+    encrypted = true
+
+    delete_on_termination = true
+
+  }
+
+  tags = merge(
+
+    local.common_tags,
+
+    {
+
+      Name = lower(
+        format(
+          "%s-%s-%s",
+          var.environment,
+          var.project,
+          each.key
+        )
+      )
 
     }
 

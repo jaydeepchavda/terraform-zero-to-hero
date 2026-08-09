@@ -48,5 +48,24 @@ resource "aws_security_group" "web" {
 
   }
 
+} 
+resource "aws_security_group" "sg-web"{
+    name = "jac-sql-sg"
+    description = "security group for database api"
+    vpc_id = var.id
+
+    ingress {
+        from_port = "sql"
+        from_port = "1433"
+        to_port = "1433"
+        protocol = "-1"
+        cidr_block = [
+            "10.0.0.0/16"
+        ]
+
+    }
+    tags {
+        Name = "jac-sql-sg"
+    }
 
 }

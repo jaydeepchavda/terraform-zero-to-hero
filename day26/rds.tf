@@ -1,7 +1,4 @@
-
-
-
-resource "aws_db_subnet_group" "main" {
+resource "aws_db_subnet_group" "main_db" {
   name = "${local.name_prefix}-db-subnet-group"
 
   subnet_ids = [
@@ -21,8 +18,7 @@ resource "aws_db_subnet_group" "main" {
 resource "aws_db_instance" "mysql" {
   identifier = "${local.name_prefix}-mysql"
 
-  engine = "mysql"
-
+  engine         = "mysql"
   instance_class = var.db_instance_class
 
   allocated_storage = 20
@@ -36,7 +32,7 @@ resource "aws_db_instance" "mysql" {
 
   port = local.db_port
 
-  db_subnet_group_name = aws_db_subnet_group.main.name
+  db_subnet_group_name = aws_db_subnet_group.main_db.name
 
   vpc_security_group_ids = [
     aws_security_group.rds.id

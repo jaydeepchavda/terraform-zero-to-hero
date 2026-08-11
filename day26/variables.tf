@@ -9,17 +9,17 @@ variable "project_name" {
 }
 
 variable "environment" {
-  description = "Deployment environment"
+  description = "Environment"
   type        = string
 }
 
 variable "vpc_cidr" {
-  description = "CIDR block for VPC"
+  description = "VPC CIDR"
   type        = string
 }
 
 variable "db_subnet_cidrs" {
-  description = "CIDR blocks for database subnets"
+  description = "Database subnet CIDRs"
   type        = list(string)
 }
 
